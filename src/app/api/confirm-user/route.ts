@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     const { data: { users }, error } = await supabase.auth.admin.listUsers();
     if (error) return NextResponse.json({error});
     
-    const user = users.find(u => u.email === email);
+    const user = users.find((u: any) => u.email === email);
     if (!user) return NextResponse.json({error: 'user not found'});
 
     const { data, error: updateError } = await supabase.auth.admin.updateUserById(user.id, {

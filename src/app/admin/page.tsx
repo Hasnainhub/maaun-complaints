@@ -13,9 +13,9 @@ export default async function AdminOverview() {
 
     // 2. Compute metrics
     const total = complaints.length;
-    const pending = complaints.filter(c => c.status === "pending").length;
-    const inProgress = complaints.filter(c => c.status === "in_progress").length;
-    const resolved = complaints.filter(c => c.status === "resolved").length;
+    const pending = complaints.filter((c: any) => c.status === "pending").length;
+    const inProgress = complaints.filter((c: any) => c.status === "in_progress").length;
+    const resolved = complaints.filter((c: any) => c.status === "resolved").length;
 
     // 3. Overdue check (pending/in_progress > 7 days)
     const oneWeekAgo = new Date();
@@ -30,7 +30,7 @@ export default async function AdminOverview() {
         const dept = c.departments?.name || "Unassigned";
         deptMap[dept] = (deptMap[dept] || 0) + 1;
     });
-    const chartData = Object.keys(deptMap).map(name => ({
+    const chartData = Object.keys(deptMap).map((name: any) => ({
         name,
         count: deptMap[name]
     })).sort((a, b) => b.count - a.count);

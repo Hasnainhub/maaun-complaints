@@ -67,7 +67,7 @@ export default async function AdminUsers() {
                                             className="text-xs border rounded p-1 dark:bg-gray-700 dark:border-gray-600 w-32"
                                         >
                                             <option value="">No Department</option>
-                                            {departments?.map(d => (
+                                            {departments?.map((d: any) => (
                                                 <option key={d.id} value={d.id}>{d.name}</option>
                                             ))}
                                         </select>

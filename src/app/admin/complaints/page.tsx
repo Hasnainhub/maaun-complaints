@@ -56,7 +56,7 @@ export default async function AdminComplaints() {
 
                                         <select name="department_id" defaultValue={c.assigned_department_id || ""} className="text-xs border rounded p-1 dark:bg-gray-700 dark:border-gray-600">
                                             <option value="">Unassigned</option>
-                                            {departments?.map(d => (
+                                            {departments?.map((d: any) => (
                                                 <option key={d.id} value={d.id}>{d.name}</option>
                                             ))}
                                         </select>
