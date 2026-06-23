@@ -32,7 +32,7 @@ export default async function AdminComplaints() {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
-                        {complaints?.map((c) => (
+                        {complaints?.map((c: any) => (
                             <tr key={c.id}>
                                 <td className="p-3 font-mono text-sm">{c.tracking_id}</td>
                                 <td className="p-3">
