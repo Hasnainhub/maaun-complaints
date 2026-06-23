@@ -53,7 +53,7 @@ export default async function TrackPage({
             const { data: updateData } = await supabase
                 .from("complaint_updates")
                 .select("*")
-                .eq("complaint_id", complaint.id)
+                .eq("complaint_id", data.id)
                 .order("created_at", { ascending: false });
 
             if (updateData) updates = updateData;
