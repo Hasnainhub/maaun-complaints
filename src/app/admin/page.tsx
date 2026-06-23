@@ -26,7 +26,7 @@ export default async function AdminOverview() {
 
     // 4. Complaints by department
     const deptMap: Record<string, number> = {};
-    complaints.forEach(c => {
+    complaints.forEach((c: any) => {
         const dept = c.departments?.name || "Unassigned";
         deptMap[dept] = (deptMap[dept] || 0) + 1;
     });
