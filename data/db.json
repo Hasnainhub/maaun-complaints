@@ -1,0 +1,136 @@
+{
+  "users": [
+    {
+      "id": "e43b12dc-4e4b-4b15-9925-5028bc6b5c2a",
+      "email": "admin@maaun.edu",
+      "password": "password123"
+    },
+    {
+      "id": "f54c23ed-5f5c-5c26-0036-6139cd7c6d3b",
+      "email": "student@maaun.edu",
+      "password": "password123"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "e43b12dc-4e4b-4b15-9925-5028bc6b5c2a",
+      "full_name": "System Admin",
+      "role": "admin",
+      "department_id": null,
+      "created_at": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "f54c23ed-5f5c-5c26-0036-6139cd7c6d3b",
+      "full_name": "Jane Doe",
+      "role": "student",
+      "department_id": "d123e456-7890-1234-5678-1234567890ab",
+      "created_at": "2024-01-02T00:00:00Z"
+    }
+  ],
+  "departments": [
+    {
+      "id": "d123e456-7890-1234-5678-1234567890ab",
+      "name": "Computer Science"
+    },
+    {
+      "id": "d987e654-3210-9876-5432-0987654321ba",
+      "name": "Information Technology"
+    }
+  ],
+  "complaints": [
+    {
+      "id": "c111c111-1111-1111-1111-111111111111",
+      "tracking_id": "CMP-0001",
+      "created_by": "f54c23ed-5f5c-5c26-0036-6139cd7c6d3b",
+      "title": "Wi-Fi not working in library",
+      "description": "I cannot connect to the Wi-Fi on the 2nd floor of the main library.",
+      "category": "infrastructure",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_department_id": "d123e456-7890-1234-5678-1234567890ab",
+      "ai_provider": "fallback",
+      "ai_confidence": null,
+      "created_at": "2024-06-17T10:00:00Z",
+      "updated_at": "2024-06-17T10:00:00Z"
+    },
+    {
+      "id": "bbf57316-a1d4-4df1-89a8-bbb57d1f1775",
+      "created_at": "2026-06-17T15:17:19.115Z",
+      "updated_at": "2026-06-17T15:17:19.115Z",
+      "created_by": "f54c23ed-5f5c-5c26-0036-6139cd7c6d3b",
+      "title": "no water",
+      "description": "there is no water in the school of computing department ",
+      "priority": "medium",
+      "status": "resolved",
+      "assigned_department_id": "d987e654-3210-9876-5432-0987654321ba",
+      "ai_provider": "fallback",
+      "ai_confidence": 0.5,
+      "tracking_id": "CMP-9586"
+    }
+  ],
+  "complaint_updates": [
+    {
+      "id": "ddfdc410-e375-4593-9cb0-630e0dfc9e70",
+      "created_at": "2026-06-17T15:20:26.374Z",
+      "updated_at": "2026-06-17T15:20:26.374Z",
+      "complaint_id": "bbf57316-a1d4-4df1-89a8-bbb57d1f1775",
+      "updated_by": "f54c23ed-5f5c-5c26-0036-6139cd7c6d3b",
+      "message": "Admin updated complaint routing/classification.",
+      "status": "pending"
+    },
+    {
+      "id": "602ac47e-5e15-40b2-adb0-759773a7dd8d",
+      "created_at": "2026-06-17T15:20:48.203Z",
+      "updated_at": "2026-06-17T15:20:48.203Z",
+      "complaint_id": "bbf57316-a1d4-4df1-89a8-bbb57d1f1775",
+      "updated_by": "f54c23ed-5f5c-5c26-0036-6139cd7c6d3b",
+      "message": "the issue has been solved",
+      "status": "resolved"
+    },
+    {
+      "id": "3af84eff-a766-4ce9-ae39-652ef566253a",
+      "created_at": "2026-06-17T15:20:50.163Z",
+      "updated_at": "2026-06-17T15:20:50.163Z",
+      "complaint_id": "bbf57316-a1d4-4df1-89a8-bbb57d1f1775",
+      "updated_by": "f54c23ed-5f5c-5c26-0036-6139cd7c6d3b",
+      "message": "the issue has been solved",
+      "status": "resolved"
+    },
+    {
+      "id": "2f16565b-af3a-4f92-878d-8066b0977941",
+      "created_at": "2026-06-17T15:20:53.147Z",
+      "updated_at": "2026-06-17T15:20:53.147Z",
+      "complaint_id": "bbf57316-a1d4-4df1-89a8-bbb57d1f1775",
+      "updated_by": "f54c23ed-5f5c-5c26-0036-6139cd7c6d3b",
+      "message": "the issue has been solved",
+      "status": "resolved"
+    },
+    {
+      "id": "faf82eca-433c-47df-8f80-3df3c5f886f8",
+      "created_at": "2026-06-17T15:20:54.593Z",
+      "updated_at": "2026-06-17T15:20:54.593Z",
+      "complaint_id": "bbf57316-a1d4-4df1-89a8-bbb57d1f1775",
+      "updated_by": "f54c23ed-5f5c-5c26-0036-6139cd7c6d3b",
+      "message": "the issue has been solved",
+      "status": "resolved"
+    },
+    {
+      "id": "8bb0fc30-97b7-4eac-8b95-010b5f1888ea",
+      "created_at": "2026-06-17T15:20:56.664Z",
+      "updated_at": "2026-06-17T15:20:56.664Z",
+      "complaint_id": "bbf57316-a1d4-4df1-89a8-bbb57d1f1775",
+      "updated_by": "f54c23ed-5f5c-5c26-0036-6139cd7c6d3b",
+      "message": "the issue has been solved",
+      "status": "resolved"
+    },
+    {
+      "id": "070d9181-1fd9-466d-aa54-96fba3430b66",
+      "created_at": "2026-06-17T15:20:56.885Z",
+      "updated_at": "2026-06-17T15:20:56.885Z",
+      "complaint_id": "bbf57316-a1d4-4df1-89a8-bbb57d1f1775",
+      "updated_by": "f54c23ed-5f5c-5c26-0036-6139cd7c6d3b",
+      "message": "the issue has been solved",
+      "status": "resolved"
+    }
+  ]
+}

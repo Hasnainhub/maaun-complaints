@@ -135,6 +135,16 @@ export default async function TrackPage({
                                     <span className="font-semibold">{complaint.departments?.name || "Unassigned"}</span>
                                 </div>
                                 <div className="flex bg-gray-50 dark:bg-gray-900 p-3 rounded items-center">
+                                    <span className="w-1/3 text-gray-500 font-medium">Location</span>
+                                    <span className="font-semibold">{complaint.location || "N/A"}</span>
+                                </div>
+                                {complaint.contact_number && (
+                                <div className="flex bg-gray-50 dark:bg-gray-900 p-3 rounded items-center">
+                                    <span className="w-1/3 text-gray-500 font-medium">Contact</span>
+                                    <span className="font-semibold">{complaint.contact_number}</span>
+                                </div>
+                                )}
+                                <div className="flex bg-gray-50 dark:bg-gray-900 p-3 rounded items-center">
                                     <span className="w-1/3 text-gray-500 font-medium">Category</span>
                                     <span className="font-semibold">{complaint.category}</span>
                                 </div>

@@ -17,33 +17,17 @@ export default async function Navbar() {
     }
 
     return (
-        <nav className="border-b bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 p-4">
+        <nav className="border-b bg-white/70 dark:bg-black/70 backdrop-blur-md border-gray-200/50 dark:border-gray-800/50 p-4 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-2 font-bold text-xl text-blue-600 dark:text-blue-400">
+                <Link href="/" className="flex items-center gap-2 font-bold text-xl text-brand-blue dark:text-brand-blueLight hover:text-brand-gold transition-colors">
                     <ShieldAlert className="w-6 h-6" /> MAAUN
                 </Link>
                 <div className="flex items-center gap-4">
-                    <Link href="/track" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600">Track Complaint</Link>
-                    {user ? (
-                        <>
-                            {role === 'admin' && <Link href="/admin" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600">Admin</Link>}
-                            {role === 'department_officer' && <Link href="/department" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600">Department</Link>}
-                            <Link href="/my-complaints" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600">My Complaints</Link>
-                            <Link href="/submit" className="text-sm font-medium border border-blue-600 text-blue-600 px-3 py-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/50">New Complaint</Link>
-                            <form action={signOut}>
-                                <button className="text-sm font-medium text-red-600 hover:text-red-700 py-2 px-4 rounded-md">
-                                    Logout
-                                </button>
-                            </form>
-                        </>
-                    ) : (
-                        <Link
-                            href="/login"
-                            className="py-2 px-4 rounded-md no-underline text-white bg-blue-600 hover:bg-blue-700 text-sm font-medium"
-                        >
-                            Login / Sign Up
-                        </Link>
-                    )}
+                    <Link href="/track" className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-brand-blue transition-colors">Track Complaint</Link>
+                    <Link href="/admin" className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-brand-blue transition-colors">Admin</Link>
+                    <Link href="/department" className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-brand-blue transition-colors">Department</Link>
+                    <Link href="/my-complaints" className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-brand-blue transition-colors">My Complaints</Link>
+                    <Link href="/submit" className="text-sm font-medium border-2 border-brand-blue text-brand-blue px-4 py-1.5 rounded-full hover:bg-brand-blue hover:text-white dark:border-brand-blueLight dark:text-brand-blueLight dark:hover:bg-brand-blueLight dark:hover:text-white transition-all shadow-sm">New Complaint</Link>
                 </div>
             </div>
         </nav>

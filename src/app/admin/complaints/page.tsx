@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { adminUpdateComplaint } from "../actions";
+import { adminUpdateComplaint, adminAddComplaintUpdate } from "../actions";
 
 export default async function AdminComplaints() {
     const supabase = createClient();
@@ -28,6 +28,7 @@ export default async function AdminComplaints() {
                             <th className="p-3 text-xs font-semibold text-gray-500 uppercase">Title / AI Info</th>
                             <th className="p-3 text-xs font-semibold text-gray-500 uppercase">Status</th>
                             <th className="p-3 text-xs font-semibold text-gray-500 uppercase">Update Classification</th>
+                            <th className="p-3 text-xs font-semibold text-gray-500 uppercase text-right">Update Status / Timeline</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -36,6 +37,9 @@ export default async function AdminComplaints() {
                                 <td className="p-3 font-mono text-sm">{c.tracking_id}</td>
                                 <td className="p-3">
                                     <p className="font-semibold text-sm max-w-[200px] truncate" title={c.title}>{c.title}</p>
+                                    <p className="text-xs text-gray-500 mt-1">
+                                        📍 {c.location || "N/A"}
+                                    </p>
                                     <p className="text-xs text-gray-500 mt-1">
                                         {c.ai_provider === 'deepseek' ? '🤖 AI Classified' : '⚠️ Fallback Rules'}
                                         {c.ai_provider === 'deepseek' && c.ai_confidence && ` (${(c.ai_confidence * 100).toFixed(0)}%)`}
@@ -67,6 +71,31 @@ export default async function AdminComplaints() {
                                             Save
                                         </button>
                                     </form>
+                                </td>
+                                <td className="p-3 text-right">
+                                    <details className="relative">
+                                        <summary className="cursor-pointer bg-blue-50 text-blue-600 dark:bg-blue-900/30 font-medium px-3 py-1 rounded text-sm hover:bg-blue-100 transition whitespace-nowrap outline-none list-none marker:hidden inline-block">
+                                            Add Update
+                                        </summary>
+                                        <div className="absolute right-0 top-10 w-80 bg-white dark:bg-gray-800 shadow-xl border border-gray-200 dark:border-gray-700 rounded-lg p-4 z-10 text-left">
+                                            <form action={adminAddComplaintUpdate} className="flex flex-col gap-3">
+                                                <input type="hidden" name="complaint_id" value={c.id} />
+                                                <div>
+                                                    <label className="text-xs font-semibold text-gray-500 uppercase block mb-1">New Status</label>
+                                                    <select name="status" defaultValue={c.status} className="w-full text-sm p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
+                                                        <option value="pending">Pending</option>
+                                                        <option value="in_progress">In Progress</option>
+                                                        <option value="resolved">Resolved</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label className="text-xs font-semibold text-gray-500 uppercase block mb-1">Custom Message / Details</label>
+                                                    <textarea name="message" required rows={3} placeholder="e.g. Working on it, Fixing the pipe, Done" className="w-full text-sm p-2 border rounded dark:bg-gray-700 dark:border-gray-600 resize-none"></textarea>
+                                                </div>
+                                                <button type="submit" className="bg-blue-600 text-white text-sm py-2 rounded hover:bg-blue-700 font-medium">Save Timeline Update</button>
+                                            </form>
+                                        </div>
+                                    </details>
                                 </td>
                             </tr>
                         ))}

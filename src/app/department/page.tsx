@@ -18,25 +18,35 @@ function StatusBadge({ status }: { status: string }) {
 export default async function DepartmentDashboard() {
     const supabase = createClient();
 
-    // Middleware ensures only department_officers get here
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return null;
 
-    // Get department info for the user
-    const { data: profile } = await supabase
-        .from("profiles")
-        .select("department_id, departments(name)")
-        .eq("id", user.id)
-        .single();
+    // AUTH BYPASS: Allow access without session
+    let deptId = null;
+    let deptName = "All Departments (Guest)";
 
-    const deptName = profile?.departments?.name || "Unknown Department";
+    if (user) {
+        // Get department info for the logged-in user
+        const { data: profile } = await supabase
+            .from("profiles")
+            .select("department_id, departments(name)")
+            .eq("id", user.id)
+            .single();
+        if (profile) {
+            deptId = profile.department_id;
+            deptName = profile.departments?.name || "Unknown Department";
+        }
+    }
 
-    // Fetch complaints assigned to this department
-    const { data: complaints } = await supabase
+    // Fetch complaints (filter by department only if we have a deptId)
+    const query = supabase
         .from("complaints")
-        .select("*")
-        .eq("assigned_department_id", profile?.department_id)
-        .order("created_at", { ascending: false });
+        .select("*");
+
+    if (deptId) {
+        query.eq("assigned_department_id", deptId);
+    }
+
+    const { data: complaints } = await query.order("created_at", { ascending: false });
 
     // Group by status for quick stats
     const stats = {

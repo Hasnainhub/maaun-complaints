@@ -49,6 +49,33 @@ export default function SubmitPage({
                         ></textarea>
                     </div>
 
+                    <div className="flex flex-col gap-2">
+                        <label htmlFor="location" className="font-semibold text-gray-700 dark:text-gray-300">
+                            Location / Building
+                        </label>
+                        <input
+                            id="location"
+                            name="location"
+                            type="text"
+                            placeholder="e.g., Block B, Room 101"
+                            required
+                            className="px-4 py-2 border rounded-md dark:border-gray-600 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <label htmlFor="contact_number" className="font-semibold text-gray-700 dark:text-gray-300">
+                            Contact Number (Optional)
+                        </label>
+                        <input
+                            id="contact_number"
+                            name="contact_number"
+                            type="tel"
+                            placeholder="e.g., 08012345678"
+                            className="px-4 py-2 border rounded-md dark:border-gray-600 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
+                        />
+                    </div>
+
                     <button
                         type="submit"
                         className="mt-4 bg-blue-600 text-white py-3 px-6 rounded-md font-semibold hover:bg-blue-700 transition"

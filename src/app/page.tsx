@@ -8,8 +8,8 @@ export default function Home() {
 
                 {/* Header Section */}
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h1 className="text-5xl border-b pb-4 mb-4 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-                        MAAUN <br className="hidden sm:block" /> Complaint System
+                    <h1 className="text-5xl border-b pb-4 mb-4 font-extrabold tracking-tight text-brand-dark dark:text-white sm:text-6xl">
+                        MAAUN <br className="hidden sm:block" /> AI Enhanced Complaint Tracking Management System
                     </h1>
                     <p className="mt-6 text-xl text-gray-600 dark:text-gray-300">
                         AI-enhanced tracking and resolution platform for Maryam Abacha American University.
@@ -17,7 +17,7 @@ export default function Home() {
                     </p>
                     <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
-                            href="/login"
+                            href="/submit"
                             className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 md:text-lg transition-colors shadow-lg hover:shadow-xl"
                         >
                             Get Started <ArrowRight className="ml-2 w-5 h-5" />

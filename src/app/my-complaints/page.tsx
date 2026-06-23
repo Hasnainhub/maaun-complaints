@@ -21,22 +21,25 @@ export default async function MyComplaints() {
 
     const { data: { user } } = await supabase.auth.getUser();
 
-    console.log(`[Complaints Page] Accessing page. User: ${user?.id || 'none'}`);
-
-    if (!user) {
-        console.log(`[Complaints Page] No user found, relying on middleware redirect`);
-        return null; // Middleware handles redirect
+    // AUTH BYPASS: Allow access without session
+    let profile = null;
+    if (user) {
+        const { data } = await supabase.from('profiles').select('full_name, role').eq('id', user.id).single();
+        profile = data;
     }
 
-    const { data: profile } = await supabase.from('profiles').select('full_name, role').eq('id', user.id).single();
+    const displayName = profile?.full_name || "Guest";
+    const displayRole = profile?.role || "Visitor";
 
-    console.log(`[Complaints Page] Profile found: ${!!profile}, Role: ${profile?.role}`);
-
-    const { data: complaints } = await supabase
+    const query = supabase
         .from("complaints")
-        .select(`*, departments (name)`)
-        .eq("created_by", user.id)
-        .order("created_at", { ascending: false });
+        .select(`*, departments (name)`);
+
+    if (user) {
+        query.eq("created_by", user.id);
+    }
+
+    const { data: complaints } = await query.order("created_at", { ascending: false });
 
     console.log(`[Complaints Page] Complaints found: ${complaints?.length || 0}`);
 
@@ -46,7 +49,7 @@ export default async function MyComplaints() {
                 <div>
                     <h1 className="text-3xl font-bold mt-2">My Complaints</h1>
                     <p className="text-gray-600 dark:text-gray-400 mt-1">
-                        Welcome back, {profile?.full_name} ({profile?.role})
+                        Welcome back, {displayName} ({displayRole})
                     </p>
                 </div>
                 <Link href="/submit" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow transition">

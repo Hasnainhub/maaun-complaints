@@ -26,6 +26,8 @@ export interface Complaint {
     created_by: string; // UUID
     title: string;
     description: string;
+    location: string | null;
+    contact_number: string | null;
     category: string;
     priority: ComplaintPriority;
     status: ComplaintStatus;

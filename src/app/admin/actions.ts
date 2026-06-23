@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient, createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
 export async function adminUpdateComplaint(formData: FormData) {
@@ -11,10 +11,11 @@ export async function adminUpdateComplaint(formData: FormData) {
 
     if (!complaintId) return;
 
-    const supabase = createClient();
+    const supabase = createAdminClient();
     const { data: { user } } = await supabase.auth.getUser();
 
-    if (!user) return;
+    // AUTH BYPASS: Allow anonymous updates
+    const userId = user?.id || null;
 
     const { error } = await supabase
         .from("complaints")
@@ -29,7 +30,7 @@ export async function adminUpdateComplaint(formData: FormData) {
         // Add a note that an admin overrode
         await supabase.from("complaint_updates").insert({
             complaint_id: complaintId,
-            updated_by: user.id,
+            updated_by: userId,
             message: "Admin updated complaint routing/classification.",
             status: "pending",
         });
@@ -52,7 +53,7 @@ export async function adminUpdateUserRole(formData: FormData) {
 
     if (!userId || !role) return;
 
-    const supabase = createClient();
+    const supabase = createAdminClient();
 
     // Important: Normal users can't update roles because of RLS.
     // However, the admin CAN update profiles because the RLS policy allows admins `FOR ALL`.
@@ -69,4 +70,48 @@ export async function adminUpdateUserRole(formData: FormData) {
     }
 
     revalidatePath("/admin/users");
+}
+
+export async function adminAddComplaintUpdate(formData: FormData) {
+    "use server";
+
+    const complaintId = formData.get("complaint_id") as string;
+    const message = formData.get("message") as string;
+    const status = formData.get("status") as string;
+
+    if (!complaintId || !message || !status) return;
+
+    const supabase = createAdminClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
+    // AUTH BYPASS: Allow anonymous updates
+    const userId = user?.id || null;
+
+    // Insert update
+    const { error: updateError } = await supabase
+        .from("complaint_updates")
+        .insert({
+            complaint_id: complaintId,
+            updated_by: userId,
+            message,
+            status,
+        });
+
+    if (updateError) {
+        console.error("Failed to add update:", updateError);
+        return;
+    }
+
+    // Update main complaint status if changed (DB trigger updates the `updated_at` column)
+    const { error: complaintError } = await supabase
+        .from("complaints")
+        .update({ status })
+        .eq("id", complaintId);
+
+    if (complaintError) {
+        console.error("Failed to update complaint status:", complaintError);
+    }
+
+    revalidatePath(`/admin/complaints`);
+    revalidatePath(`/track`);
 }
