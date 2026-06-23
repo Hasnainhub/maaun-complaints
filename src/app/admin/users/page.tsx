@@ -31,7 +31,7 @@ export default async function AdminUsers() {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
-                        {users?.map((u) => (
+                        {users?.map((u: any) => (
                             <tr key={u.id}>
                                 <td className="p-3">
                                     <p className="font-semibold text-sm truncate">{u.full_name}</p>

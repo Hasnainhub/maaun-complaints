@@ -21,7 +21,7 @@ export default async function AdminOverview() {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
     const overdueCount = complaints.filter(
-        (c) => (c.status === "pending" || c.status === "in_progress") && new Date(c.created_at) < oneWeekAgo
+        ((c: any) => (c.status === "pending" || c.status === "in_progress") && new Date(c.created_at) < oneWeekAgo)
     ).length;
 
     // 4. Complaints by department

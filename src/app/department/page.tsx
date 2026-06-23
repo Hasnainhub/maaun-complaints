@@ -51,9 +51,9 @@ export default async function DepartmentDashboard() {
     // Group by status for quick stats
     const stats = {
         total: complaints?.length || 0,
-        pending: complaints?.filter((c) => c.status === "pending").length || 0,
-        in_progress: complaints?.filter((c) => c.status === "in_progress").length || 0,
-        resolved: complaints?.filter((c) => c.status === "resolved").length || 0,
+        pending: complaints?.filter((c: any) => c.status === "pending").length || 0,
+        in_progress: complaints?.filter((c: any) => c.status === "in_progress").length || 0,
+        resolved: complaints?.filter((c: any) => c.status === "resolved").length || 0,
     };
 
     return (

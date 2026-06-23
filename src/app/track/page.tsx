@@ -164,7 +164,7 @@ export default async function TrackPage({
                                 {updates.length === 0 ? (
                                     <p className="text-gray-500 italic">No updates have been posted yet. Check back soon.</p>
                                 ) : (
-                                    updates.map((update) => (
+                                    updates.map((update: any) => (
                                         <div key={update.id} className="relative pl-6 border-l-2 border-blue-200 dark:border-blue-900">
                                             <div className="absolute w-3 h-3 bg-blue-500 rounded-full -left-[7px] top-1"></div>
                                             <p className="text-xs text-gray-500 mb-1">{new Date(update.created_at).toLocaleString()}</p>
